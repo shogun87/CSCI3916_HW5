@@ -73,3 +73,33 @@ export function fetchMovies() {
         }).catch((e) => console.log(e));
     }
 }
+
+// Function to handle submitting a review from the web app
+export function submitReview(data) {
+    const env = runtimeEnv();
+    console.log("data", data)
+    return dispatch => {
+        return fetch(`${env.REACT_APP_API_URL}/reviews`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+            body: JSON.stringify(data),
+            mode: 'cors'
+        }).then((response) => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response.json()
+        }).then((res) => {
+            console.log("response", res)
+            localStorage.setItem('movieId', data.movieId);
+            localStorage.setItem('reviewerId', data.reviewerId);
+            localStorage.setItem('review', data.review);
+            localStorage.setItem('rating', data.rating);
+        }).catch((e) => console.log(e)
+        ).then(dispatch(fetchMovie(data.movieId)));
+    }
+}

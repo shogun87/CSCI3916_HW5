@@ -45,7 +45,7 @@ class Authentication extends Component {
         const userLoggedIn = (<div>Logged in as: {this.props.username} <button onClick={this.logout.bind(this)}>Logout</button></div>);
 
         return (
-            <div>U
+            <div>
                 {this.props.loggedIn ? userLoggedIn : userNotLoggedIn}
             </div>
         )
