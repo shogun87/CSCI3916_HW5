@@ -94,7 +94,6 @@ export function submitReview(data) {
             }
             return response.json()
         }).then((res) => {
-            console.log("response", res)
             localStorage.setItem('movieId', data.movieId);
             localStorage.setItem('reviewerId', data.reviewerId);
             localStorage.setItem('review', data.review);
